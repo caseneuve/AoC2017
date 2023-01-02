@@ -1,0 +1,18 @@
+(ns day%02d.solution
+  (:require [file :as f]
+            [clojure.string :refer [split-lines split]]))
+
+(defn -main [day]
+  (let [input (->> day)]
+    {:part1 nil :part2 nil}))
+
+
+(comment
+  (let [test-input "
+
+"
+        input (->> test-input)
+        ]
+        input
+    )
+  )
