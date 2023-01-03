@@ -13,6 +13,8 @@
 "
         input (->> test-input)
         ]
-        input
+    (->> input
+
+         )
     )
   )
