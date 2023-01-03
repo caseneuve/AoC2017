@@ -17,5 +17,7 @@
   (let [test-input {:1 [["1122" 3] ["1111" 4] ["1234" 0] ["91212129" 9]]
                     :2 [["1212" 6] ["1221" 0] ["123425" 4] ["123123" 12] ["12131415" 4]]}]
     (for [[part input] test-input]
-      (every? true? (for [[it exp] input] (= exp (solve (parse it) (part {:1 1, :2 (/ (count it) 2)})))))))
+      (every? true?
+              (for [[it exp] input, :let [shift (case part :1 1, :2 (/ (count it) 2))]]
+                (= exp (solve (parse it) shift))))))
   )

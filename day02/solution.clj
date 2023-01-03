@@ -24,6 +24,6 @@
                     :2 ["5 9 2 8\n9 4 7 3\n3 8 6 5", 9]}]
     (for [[p [it exp]] test-input
           :let [it (cond->> (parse it) (= p :2) (map #(combinations % 2))),
-                f (p {:1 minmax-diff :2 eavenly-div})]]
+                f (case p :1 minmax-diff, :2 eavenly-div)]]
       (= exp (solve it f))))
   )

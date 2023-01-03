@@ -10,7 +10,7 @@
 
 (defn -main [day]
   (let [input (->> day f/lines (map #(re-seq #"\w+" %)))
-        solve #(reduce %1 0 input)]
+        solve #(reduce % 0 input)]
     {:part1 (solve no-dups)
      :part2 (solve no-anagrams)}))
 
