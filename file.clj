@@ -1,5 +1,5 @@
 (ns file
-  (:require [clojure.string :refer [split-lines]]))
+  (:require [clojure.string :refer [split-lines trim]]))
 
-(defn string [dir] (slurp (str dir "/" "input.txt")))
+(defn string [dir] (->> "input.txt" (str dir "/") slurp trim))
 (defn lines [dir] (split-lines (string dir)))
