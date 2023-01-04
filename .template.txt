@@ -1,5 +1,5 @@
 (ns day%02d.solution
-  (:require [file :as f]
+  (:require [input :refer [f->str]]
             [clojure.string :refer [split-lines split]]))
 
 (defn -main [day]
