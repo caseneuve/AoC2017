@@ -1,5 +1,5 @@
 (ns day03.solution
-  (:require [file :as f]))
+  (:require [input :refer [f->str]]))
 
 (defn manhattan [[ax ay] [bx by]]
   (+ (abs (- ax bx)) (abs (- ay by))))
@@ -18,7 +18,7 @@
                 (recur n p (->> (first s) dec (conj (rest s))) d (assoc S p n)))))))
 
 (defn -main [day]
-  (let [input (->> day f/string parse-long)]
+  (let [input (->> day f->str parse-long)]
     {:part1 (solve input :1), :part2 (solve input :2)}))
 
 

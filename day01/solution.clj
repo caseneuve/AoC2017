@@ -1,5 +1,5 @@
 (ns day01.solution
-  (:require [file :as f]))
+  (:require [input :refer [f->str]]))
 
 (defn parse [it] (keep (comp parse-long str) it))
 
@@ -8,7 +8,7 @@
     (reduce #(if (apply = %2) (+ %1 (first %2)) %1) 0 pairs)))
 
 (defn -main [day]
-  (let [input (->> day f/string parse)]
+  (let [input (->> day f->str parse)]
     {:part1 (solve input 1)
      :part2 (solve input (/ (count input) 2))}))
 

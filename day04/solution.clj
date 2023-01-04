@@ -1,5 +1,5 @@
 (ns day04.solution
-  (:require [file :as f]
+  (:require [input :refer [f->lines]]
             [clojure.math.combinatorics :refer [combinations]]))
 
 (def no-dups #(cond->> %1 (= (count %2) (count (set %2))) inc))
@@ -9,7 +9,7 @@
     (cond->> sum (= c (remove #(apply = %) c)) inc)))
 
 (defn -main [day]
-  (let [input (->> day f/lines (map #(re-seq #"\w+" %)))
+  (let [input (->> day f->lines (map #(re-seq #"\w+" %)))
         solve #(reduce % 0 input)]
     {:part1 (solve no-dups), :part2 (solve no-anagrams)}))
 

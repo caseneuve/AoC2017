@@ -1,5 +1,5 @@
 (ns day02.solution
-  (:require [file :as f]
+  (:require [input :refer [f->str]]
             [clojure.math.combinatorics :refer [combinations]]))
 
 (defn parse [it]
@@ -14,7 +14,7 @@
 (def solve #(reduce %2 0 %1))
 
 (defn -main [day]
-  (let [input (->> day f/string parse)]
+  (let [input (->> day f->str parse)]
     {:part1 (solve input minmax-diff)
      :part2 (solve (map #(combinations % 2) input) eavenly-div)}))
 
