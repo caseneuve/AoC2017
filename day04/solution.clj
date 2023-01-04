@@ -2,17 +2,16 @@
   (:require [file :as f]
             [clojure.math.combinatorics :refer [combinations]]))
 
-(def no-dups #(if (= (count %2) (count (set %2))) (inc %1) %1))
+(def no-dups #(cond->> %1 (= (count %2) (count (set %2))) inc))
 
 (defn no-anagrams [sum pwd]
   (let [c (combinations (map sort pwd) 2)]
-    (if (= (count c) (count (remove #(apply = %) c))) (inc sum) sum)))
+    (cond->> sum (= c (remove #(apply = %) c)) inc)))
 
 (defn -main [day]
   (let [input (->> day f/lines (map #(re-seq #"\w+" %)))
         solve #(reduce % 0 input)]
-    {:part1 (solve no-dups)
-     :part2 (solve no-anagrams)}))
+    {:part1 (solve no-dups), :part2 (solve no-anagrams)}))
 
 
 (comment
