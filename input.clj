@@ -6,3 +6,4 @@
 (defn lines [s] (split-lines s))
 (defn nums [s] (->> s (re-seq #"-?\d+") (mapv parse-long)))
 (defn f->nums [dir] (->> dir f->str nums))
+(defn words [s] (re-seq #"\w+" s))

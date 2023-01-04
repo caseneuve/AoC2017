@@ -1,5 +1,5 @@
 (ns day04.solution
-  (:require [input :refer [f->lines]]
+  (:require [input :refer [f->lines words]]
             [clojure.math.combinatorics :refer [combinations]]))
 
 (def no-dups #(cond->> %1 (= (count %2) (count (set %2))) inc))
@@ -9,8 +9,7 @@
     (cond->> sum (= c (remove #(apply = %) c)) inc)))
 
 (defn -main [day]
-  (let [input (->> day f->lines (map #(re-seq #"\w+" %)))
-        solve #(reduce % 0 input)]
+  (let [input (->> day f->lines (map words)), solve #(reduce % 0 input)]
     {:part1 (solve no-dups), :part2 (solve no-anagrams)}))
 
 
@@ -22,10 +21,9 @@
                         [["abcde xyz ecdab"] 0]
                         [["a ab abc abd abf abj"] 1]
                         [["iiii oiii ooii oooi oooo"] 1]
-                        [["oiii ioii iioi iiio"] 0]]}
-        parse #(apply re-seq #"\w+" %)]
+                        [["oiii ioii iioi iiio"] 0]]}]
     (for [[p its] test-input]
       (every? true?
               (for [[it exp] its, :let [f (if (= p :1) no-dups no-anagrams)]]
-                (= exp (f 0 (parse it)))))))
+                (= exp (f 0 (apply words it)))))))
   )
