@@ -2,21 +2,17 @@
   (:require [input :refer [f->str]]))
 
 (defn solve [it]
-  (loop [[c & ch] it, s [0 0 0 0]] ; [group-lvl garbage? group-scores garbage-collected]
-    (cond (nil? c) [(s 2) (s 3)]
-          (> (s 1) 0) (case c
-                        \! (recur (rest ch) s)
-                        \> (recur ch (assoc s 1 0))
-                           (recur ch (update s 3 inc)))
-          :else (case c
-                  \< (recur ch (assoc s 1 1))
-                  \{ (recur ch (update s 0 inc))
-                  \} (recur ch (-> s (update 2 + (s 0)) (update 0 dec)))
-                     (recur ch s)))))
+  (reduce
+   (fn [s c]
+     (cond (s 2) (assoc s 2 false)
+           (s 1) (case c \! (assoc s 2 true), \> (assoc s 1 false), (update s 4 inc))
+           :else (case c \< (assoc s 1 true), \{ (update s 0 inc), \} (-> s (update 3 + (s 0)) (update 0 dec)), s)))
+   [0 false false 0 0]    ; [group-lvl garbage? skip? scores collected]
+   it))
 
 (defn -main [day]
   (let [input (f->str day)]
-    (zipmap [:part1 :part2] (solve input))))
+    (zipmap [:part1 :part2] (->> input solve (drop 3)))))
 
 
 (comment
@@ -26,5 +22,5 @@
                     2 [["<>" 0] ["<random characters>" 17] ["<<<<>" 3] ["<{!>}>" 2]
                        ["<!!>" 0] ["<!!!>>" 0] ["<{o\"i!a,<{i<a>" 10]]}]
     (for [[p its] test-input]
-      (every? true? (for [[it exp] its] (= ((solve it) (dec p)) exp)))))
+      (every? true? (for [[it exp] its, :let [r (zipmap [1 2] (drop 3 (solve it)))]] (= (r p) exp)))))
   )
