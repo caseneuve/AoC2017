@@ -17,7 +17,7 @@
               (conj xs [k #(if ((read c) (%1 x) n) (update %1 %2 (read op) v) %1)])))
           []))))
 
-(def state #(apply hash-map (interleave (->> % (map first) set (cons :max)) (repeat 0))))
+(def state #(zipmap (->> % (map first) set (cons :max)) (repeat 0)))
 
 (defn solve [it part]
   (let [i (instructions it), s (state i)
