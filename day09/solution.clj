@@ -10,9 +10,7 @@
    [0 false false 0 0]    ; [group-lvl garbage? skip? scores collected]
    it))
 
-(defn -main [day]
-  (let [input (f->str day)]
-    (zipmap [:part1 :part2] (->> input solve (drop 3)))))
+(defn -main [day] (zipmap [:part1 :part2] (->> (f->str day) solve (drop 3))))
 
 
 (comment
