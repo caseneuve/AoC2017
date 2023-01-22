@@ -1,4 +1,4 @@
-(ns day08.solution
+(ns day08
   (:require [input :refer [f->str]]
             [clojure.string :refer [replace split]]))
 

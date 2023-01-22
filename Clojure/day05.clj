@@ -1,4 +1,4 @@
-(ns day05.solution
+(ns day05
   (:require [input :refer [f->nums nums]]))
 
 (defn solve [it part]

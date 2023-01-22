@@ -1,4 +1,4 @@
-(ns day03.solution
+(ns day03
   (:require [input :refer [f->str]]))
 
 (defn manhattan [[ax ay] [bx by]]

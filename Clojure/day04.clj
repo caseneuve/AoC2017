@@ -1,4 +1,4 @@
-(ns day04.solution
+(ns day04
   (:require [input :refer [f->lines words]]
             [clojure.math.combinatorics :refer [combinations]]))
 

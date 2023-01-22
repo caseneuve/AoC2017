@@ -1,4 +1,4 @@
-(ns day07.solution
+(ns day07
   (:require [input :refer [f->str]]
             [clojure.set :refer [difference]]))
 

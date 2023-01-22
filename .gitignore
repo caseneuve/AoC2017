@@ -1,3 +1,5 @@
 .clj-kondo/
+.env
 .lsp/
 .token
+input/

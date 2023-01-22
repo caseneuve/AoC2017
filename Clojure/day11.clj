@@ -1,4 +1,4 @@
-(ns day11.solution
+(ns day11
   (:require [input :refer [f->str]]))
 
 ;;

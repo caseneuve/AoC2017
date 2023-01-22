@@ -1,4 +1,4 @@
-(ns day10.solution
+(ns day10
   (:require [input :refer [f->str]]))
 
 (def suffix [17 31 73 47 23])

@@ -1,4 +1,4 @@
-(ns day06.solution
+(ns day06
   (:require [input :refer [f->nums]]))
 
 (defn redistribute [bx]
