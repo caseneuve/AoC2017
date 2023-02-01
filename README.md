@@ -50,3 +50,4 @@ Day | Clojure
 10  | [[x]](Clojure/day10.clj)
 11  | [[x]](Clojure/day11.clj)
 12  | [[x]](Clojure/day12.clj)
+13  | [[x]](Clojure/day13.clj)
