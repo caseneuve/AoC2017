@@ -13,7 +13,7 @@
   (when (= 0 (mod n 100000)) (printf "\r%8d %3d" n j) (flush)))
 
 (defn solve1 [a b]
-  (loop [n 0 [a b] [a b] j 0] ;; (display n j)
+  (loop [n 1 [a b] [a b] j 0] ;; (display n j)
     (if (> n P1) j
         (let [ab (map #(rem % DIV) [(* a FA) (* b FB)]), match? (apply = (map bits16 ab))]
           (recur (inc n) ab (cond-> j match? inc))))))
