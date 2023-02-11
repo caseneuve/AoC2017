@@ -22,7 +22,7 @@
   (take P2 (keep #(when (= 0 (mod % m)) (bits16 %)) (iterate #(rem (* % f) DIV) n))))
 
 (defn solve2 [a b]
-  (loop [n 0 [a & ax] (gen a FA 4) [b & bx] (gen b FB 8) j 0] ;; (display n j)
+  (loop [n 1 [a & ax] (gen a FA 4) [b & bx] (gen b FB 8) j 0] ;; (display n j)
     (if (nil? a) j (recur (inc n) ax bx (cond-> j (= a b) inc)))))
 
 ;; it will take a while...
