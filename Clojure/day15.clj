@@ -15,16 +15,15 @@
 (defn solve1 [a b]
   (loop [n 0 [a b] [a b] j 0] (display n j)
     (if (> n P1) j
-        (let [ab (map #(rem % DIV) [(* a FA) (* b FB)])
-              match? (apply = (map bits16 ab))]
-          (recur (inc n) ab (if match? (inc j) j))))))
+        (let [ab (map #(rem % DIV) [(* a FA) (* b FB)]), match? (apply = (map bits16 ab))]
+          (recur (inc n) ab (cond-> j match? inc))))))
 
 (defn gen [n f m]
   (take P2 (keep #(when (= 0 (mod % m)) (bits16 %)) (iterate #(rem (* % f) DIV) n))))
 
 (defn solve2 [a b]
   (loop [n 0 [a & ax] (gen a FA 4) [b & bx] (gen b FB 8) j 0] (display n j)
-    (if (nil? a) j (recur (inc n) ax bx (if (= a b) (inc j) j)))))
+    (if (nil? a) j (recur (inc n) ax bx (cond-> j (= a b) inc)))))
 
 (defn -main [day]
   (let [[a b] (f->nums day)]
