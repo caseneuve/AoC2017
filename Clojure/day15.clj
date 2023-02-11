@@ -1,33 +1,40 @@
 (ns day15
   (:require [input :refer [f->nums]]))
 
-(def factor-a 16807)
-(def factor-b 48271)
-(def divisor 2147483647)
-(def pairs1 40000000)
-(def pairs2  5000000)
+(def DIV 2147483647)
+(def FA       16807)
+(def FB       48271)
+(def P1    40000000)
+(def P2     5000000)
 
 (defn bits16 [n] (bit-and n 0xffff))
-(defn display [n j] (when (= 0 (mod n 100000)) (printf "\r%8d %3d" n j) (flush)))
+
+(defn display [n j]
+  (when (= 0 (mod n 100000)) (printf "\r%8d %3d" n j) (flush)))
 
 (defn solve1 [a b]
   (loop [n 0 [a b] [a b] j 0]
     (display n j)
-    (if (> n pairs1) j
-        (let [ab [(rem (* a factor-a) divisor) (rem (* b factor-b) divisor)]
+    (if (> n P1) j
+        (let [ab [(rem (* a FA) DIV) (rem (* b FB) DIV)]
               match? (apply = (map bits16 ab))]
           (recur (inc n) ab (if match? (inc j) j))))))
 
-(defn generate [n f m]
-  (take pairs2
+(defn gen [n f m]
+  (take P2
         (keep #(when (= 0 (mod % m)) (bits16 %))
-              (iterate #(rem (* % f) divisor) n))))
+              (iterate #(rem (* % f) DIV) n))))
 
 (defn solve2 [a b]
-  (loop [n 0 [a & ax] (generate a factor-a 4) [b & bx] (generate b factor-b 8) j 0]
+  (loop [n 0 [a & ax] (gen a FA 4) [b & bx] (gen b FB 8) j 0]
     (display n j)
     (if (nil? a) j (recur (inc n) ax bx (if (= a b) (inc j) j)))))
 
 (defn -main [day]
   (let [[a b] (f->nums day)]
     {:part1 (solve1 a b) :part2 (solve2 a b)}))
+
+
+(comment
+  (apply = (map bits16 [245556042 1431495498]))
+  )
