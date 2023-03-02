@@ -5,7 +5,6 @@
 (defn parse [it len]
   (->> it (re-seq #"((s)(\d+)|(x)(\d+)/(\d+)|(p)(\w)/(\w))")
        (map (fn [[_ _ s s1 x x1 x2 p p1 p2]]
-              (let [len (count it)])
               (cond s #(->> % cycle (drop (- len (parse-long s1))) (take len) vec)
                     x #(-> % (assoc (parse-long x1) (% (parse-long x2))) (assoc (parse-long x2) (% (parse-long x1))))
                     p #(-> (apply str %) (replace (re-pattern (str p1 "|" p2)) {p1 p2 p2 p1}) vec))))
