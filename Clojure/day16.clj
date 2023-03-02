@@ -15,6 +15,9 @@
         moves (-> day f->str (parse (count programs)))
         dances (iterate moves programs)]
     {:part1 (apply str (nth dances 1))
+     ;; heuristics: my bet was that programs would eventually repeat, it appeared
+     ;; that the sequence repeated quite early with my input -- after 60th dance
+     ;; it returned the alphabetical order
      :part2 (loop [[it & itx] dances, vi #{}, n 0]
               (if (contains? vi it) (apply str (nth dances (rem 1000000000 n)))
                   (recur itx (conj vi it) (inc n))))}))
