@@ -7,8 +7,8 @@
   (if-let [c (and y (re-matches #"-?\d+" y))] (parse-long c) (rx y)))
 
 (def ops
-  {"snd" (fn [rx x & _] (assoc rx :freq (rx x)))
-   "rcv" (fn [rx x & _] (cond-> rx (not= 0 (rx x)) (assoc :last (rx :freq))))
+  {"snd" (fn [rx x _] (assoc rx :freq (rx x)))
+   "rcv" (fn [rx x _] (cond-> rx (not= 0 (rx x)) (assoc :last (rx :freq))))
    "jgz" (fn [rx x y] (if (not= 0 (rx x)) (update rx :i + y) (update rx :i inc)))
    "set" (fn [rx x y] (assoc rx x y))
    "add" (fn [rx x y] (update rx x + y))
