@@ -17,7 +17,7 @@
 
 (defn run1 [instructions]
   (loop [prog (merge (zipmap (map second instructions) (repeat 0)) {:pos 0})]
-    (if-let [l (prog :last)] l (recur (ops prog (instructions (prog :pos)))))))
+    (or (prog :last) (recur (ops prog (instructions (prog :pos)))))))
 
 (defn run2 [instructions]
   (let [init {:pos 0, "p" 0, :sent 0, :queue (clojure.lang.PersistentQueue/EMPTY)}
