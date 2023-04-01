@@ -2,7 +2,7 @@
   (:require [input :refer [f->lines]]))
 
 (defn ops [prog [op x y]]
-  (let [value #(if-let [n (and % (parse-long %))] n (prog %)), y (value y)]
+  (let [value #(or (and % (parse-long %)) (prog %)), y (value y)]
     (case op "jgz" (if (> (value x) 0) (update prog :pos + y) (update prog :pos inc))
           (-> (case op
                 ;; part 1 only:
