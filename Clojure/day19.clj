@@ -16,7 +16,7 @@
          :when (g (mapv + p nd))]
      nd)))
 
-(defn move [p d g r]
+(defn move [p d r g]
   (let [c (g p), np (mapv + p d)]
     (case c
       \+ (as-> (new-dir p d g) nd [(mapv + p nd) nd r])
@@ -25,7 +25,7 @@
 
 (defn solve [it]
   (loop [pos (->> it keys (sort-by second) first), dir [0 1], result {:part1 "", :part2 1}]
-    (let [[pos dir result] (move pos dir it result)]
+    (let [[pos dir result] (move pos dir result it)]
       (if (nil? (it pos)) result
           (recur pos dir (update result :part2 inc))))))
 
